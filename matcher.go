@@ -28,7 +28,7 @@ func (m *Matcher) map_prime(param_ix int, opts []int) []int {
 	return res
 }
 
-func (m *Matcher) to_prime_dots(config [][]int) []int {
+func (m *Matcher) Primify(config [][]int) []int {
 	res := make([]int, len(config))
 	for pix, opts := range config {
 		param_opts_primes := m.map_prime(pix, opts)
@@ -48,9 +48,9 @@ func (m *Matcher) opts_compatibles(opts1_prime_dot, opts2_prime_dot int) bool {
 	return m.combos_prime_dot_compatibility[opts2_prime_dot][opts1_prime_dot]
 }
 
-func (m *Matcher) Prime_dots_compatibles(a_dots, b_dots []int) bool {
+func (m *Matcher) Compatibles(a_upv, b_upv []int) bool {
 	for i := 0; i < m.params_len; i++ {
-		if !m.opts_compatibles(a_dots[i], b_dots[i]) {
+		if !m.opts_compatibles(a_upv[i], b_upv[i]) {
 			return false
 		}
 	}
@@ -58,12 +58,12 @@ func (m *Matcher) Prime_dots_compatibles(a_dots, b_dots []int) bool {
 	return true
 }
 
-// // retorna true si a y b son configuraciones compatibles
-func (m *Matcher) Compatibles(a, b [][]int) bool {
-	a_dots := m.to_prime_dots(a)
-	b_dots := m.to_prime_dots(b)
+// retorna true si a y b son configuraciones compatibles
+func (m *Matcher) Match(a, b [][]int) bool {
+	a_dots := m.Primify(a)
+	b_dots := m.Primify(b)
 
-	return m.Prime_dots_compatibles(a_dots, b_dots)
+	return m.Compatibles(a_dots, b_dots)
 }
 
 // c = <p1,p2,p3> where

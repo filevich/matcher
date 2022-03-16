@@ -23,7 +23,7 @@ func TestCompatibility(t *testing.T) {
 	cA := [][]int{{singles, triples}, {a20, a40}}
 	cB := [][]int{{singles}, {a20}}
 
-	if ok := m.Compatibles(cA, cB); !ok {
+	if ok := m.Match(cA, cB); !ok {
 		t.Error("deberian ser compatibles")
 	}
 
@@ -33,31 +33,31 @@ func TestCompatibility(t *testing.T) {
 	c4 := [][]int{{singles, triples}, {a30}}
 	c5 := [][]int{{double, triples}, {a30, a40}}
 
-	if ok := m.Compatibles(c1, c2); !ok { //
+	if ok := m.Match(c1, c2); !ok { //
 		t.Log("c1 y c2 deberian ser compatibles")
 	}
 
-	if ok := !m.Compatibles(c1, c3); !ok { //
+	if ok := !m.Match(c1, c3); !ok { //
 		t.Log("c1 y c3 NO deberian ser compatibles")
 	}
 
-	if ok := !m.Compatibles(c1, c4); !ok { //
+	if ok := !m.Match(c1, c4); !ok { //
 		t.Log("c1 y c4 NO deberian ser compatibles")
 	}
 
-	if ok := m.Compatibles(c1, c5); !ok { //
+	if ok := m.Match(c1, c5); !ok { //
 		t.Log("c1 y c5 deberian ser compatibles")
 	}
 
-	if ok := !m.Compatibles(c2, c3); !ok { //
+	if ok := !m.Match(c2, c3); !ok { //
 		t.Log("c2 y c3 NO deberian ser compatibles")
 	}
 
-	if ok := !m.Compatibles(c2, c4); !ok { //
+	if ok := !m.Match(c2, c4); !ok { //
 		t.Log("c2 y c4 NO deberian ser compatibles")
 	}
 
-	if ok := !m.Compatibles(c3, c4); !ok { //
+	if ok := !m.Match(c3, c4); !ok { //
 		t.Log("c3 y c4 NO deberian ser compatibles")
 	}
 
